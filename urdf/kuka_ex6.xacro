@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+
+<robot name="kuka_ex6" xmlns:xacro="http://wiki.ros.org/xacro">
+    <xacro:include filename="$(find kuka_ex6)/urdf/kuka_ex6_macro.xacro" />
+		
+		<xacro:kuka_link name="binario">
+			<geometry>
+				<box size="0.05 0.05 2"/>	
+			</geometry>
+			<origin xyz="0 0 0" rpy="1.55 0 0"/>					
+		</xacro:kuka_link>
+		
+		<xacro:kuka_joint
+			name="joint0" 
+			type="prismatic"
+			parent="binario"
+			child="base_link">		
+			<origin xyz="0 0 0" />	
+			<axis xyz="0 1 0"/>
+			<limit effort="300" velocity ="1" lower="-0.90" upper="0.90"/>	
+		</xacro:kuka_joint>
+		
+		<xacro:base_link_macro 
+			base_link_name="base_link">
+		</xacro:base_link_macro>						
+		
+		<xacro:kuka_joint
+			name="joint1" 
+			type="revolute"
+			parent="base_link"
+			child="link1">		
+			<origin xyz="0 0 0.23" />	
+			<axis xyz="0 0 1"/>
+			<limit effort="176" velocity ="1.71" lower="${-170 * 3.14 / 180}" upper="${170 * 3.14 / 180}"/>	
+		</xacro:kuka_joint>
+		<xacro:kuka_link name="link1">
+			<geometry>
+				<cylinder length="0.1" radius="0.05"/>	
+			</geometry>
+			<origin xyz="0 0 0" rpy="0 0 0.09"/>					
+		</xacro:kuka_link>
+		<xacro:kuka_joint
+			name="joint2"
+			type="prismatic"
+			parent="link1"
+			child="link2">
+			<origin xyz="0 0 0.1" />
+			<axis xyz="0 0 1"/>				
+			<limit effort="300" velocity ="1.71" lower="-0.08" upper="0.08"/>
+		</xacro:kuka_joint>
+		<xacro:kuka_link name="link2">
+			<geometry>
+				<cylinder length="0.2" radius="0.03"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="0 0 0"/>			
+		</xacro:kuka_link>
+		<xacro:kuka_joint
+			name="joint3"
+			type="revolute"
+			parent="link2"
+			child="link3">
+			<origin xyz="0 -0.05 0.12" />				
+			<axis xyz="0 -1 0"/>
+			<limit effort="110" velocity ="2.26" lower="${-120 * 3.14 / 180}" upper="1.90"/>
+		</xacro:kuka_joint>
+		<xacro:kuka_link name="link3">
+			<geometry>
+				<cylinder length="0.2" radius="0.03"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="1.5 0 0"/>
+		</xacro:kuka_link>
+		<xacro:kuka_joint
+			name="joint4"
+			type="revolute"
+			parent="link3"
+			child="link4">
+			<origin xyz="0 -0.05 0.1" />
+			<axis xyz="0 0 1"/>
+			<limit effort="110" velocity ="2.44" lower="${-170 * 3.14 / 180}" upper="${170 * 3.14 / 180}"/>
+		</xacro:kuka_joint>
+		<xacro:kuka_link name="link4">
+			<geometry>
+				<cylinder length="0.2" radius="0.03"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+		</xacro:kuka_link>
+		<xacro:kuka_joint
+			name="joint5"
+			type="revolute"
+			parent="link4"
+			child="link5">
+			<origin xyz="0 0.08 0.07" />
+			<axis xyz="1 0 0"/>
+			<limit effort="40" velocity ="3.14" lower="-0.03" upper="0.28"/>
+		</xacro:kuka_joint>
+		<xacro:kuka_link name="link5">
+			<geometry>
+				<cylinder length="0.2" radius="0.03"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="1.5 0 0"/>
+		</xacro:kuka_link>
+		<xacro:kuka_joint
+			name="joint6"
+			type="prismatic"
+			parent="link5"
+			child="end_effector">
+			<origin xyz="0 0.08 0" />
+			<axis xyz="0 1 0"/>
+			<limit effort="40" velocity ="3.14" lower="-0.02" upper="0.03"/>
+		</xacro:kuka_joint>
+		<xacro:end_effector name="end_effector">
+			<geometry>
+				<cylinder length="0.1" radius="0.02"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="1.5 0 0"/>
+		</xacro:end_effector>
+</robot>
+
+
